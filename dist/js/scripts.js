@@ -44,43 +44,45 @@ if (document.querySelector('.block-inner__slider')) {
     speed: 400,
     effect: 'fade',
     autoplay: {
-      delay: 2000,
+      delay: 15000,
       disableOnInteraction: false,
     },
   });
 }
 
 if (document.querySelector('.block-reviews__slider')) {
-  const swiperReviews = new Swiper('.block-reviews__slider', {
+  const swiper = new Swiper('.block-reviews__slider', {
     observer: true,
     observeParents: true,
     slidesPerView: 2,
     spaceBetween: 30,
     speed: 400,
+    loop: true,
+    lazy: true,
+
     pagination: {
       el: '.block-reviews__dotts',
       type: 'custom',
       renderCustom: function (swiper, current, total) {
-        // Функция для добавления ведущего нуля
-        const pad = (num) => (num < 10 ? '0' + num : num.toString());
+        const pad = (num) => num < 10 ? '0' + num : num.toString();
 
-        // Обновляем фракцию
         document.querySelector('.block-reviews__current').textContent = pad(current);
         document.querySelector('.block-reviews__all').textContent = pad(total);
 
-        // Генерируем все буллеты без ограничения
-        let bullets = '';
+        let bulletsHTML = '';
         for (let i = 1; i <= total; i++) {
-          bullets += `<span class="swiper-pagination-bullet ${i === current ? 'swiper-pagination-bullet-active' : ''}" data-index="${i}"></span>`;
+          bulletsHTML += `<span class="swiper-pagination-bullet ${i === current ? 'swiper-pagination-bullet-active' : ''}" data-index="${i}"></span>`;
         }
 
-        return bullets;
+        return bulletsHTML;
       }
     },
+
     navigation: {
       prevEl: '.block-reviews__arrow-prev',
       nextEl: '.block-reviews__arrow-next',
     },
+
     breakpoints: {
       0: {
         slidesPerView: 1,
@@ -93,12 +95,22 @@ if (document.querySelector('.block-reviews__slider')) {
     },
   });
 
-  // Обработчик клика по буллетам
+  // --- КЛИК ПО БУЛЛЕТАМ ---
   document.querySelector('.block-reviews__dotts').addEventListener('click', function (e) {
     if (e.target.classList.contains('swiper-pagination-bullet')) {
       const index = parseInt(e.target.getAttribute('data-index'));
-      swiperReviews.slideTo(index - 1);
+      swiper.slideToLoop(index - 1); // <-- ВАЖНО! Используем slideToLoop()
     }
+  });
+
+  // --- ОБНОВЛЕНИЕ АКТИВНОГО БУЛЛЕТА ПРИ СМЕНЕ СЛАЙДА ---
+  swiper.on('slideChange', () => {
+    const bullets = document.querySelectorAll('.swiper-pagination-bullet');
+    const realCurrent = swiper.realIndex + 1;
+
+    bullets.forEach((bullet, i) => {
+      bullet.classList.toggle('swiper-pagination-bullet-active', i + 1 === realCurrent);
+    });
   });
 }
 
@@ -168,7 +180,6 @@ let _slideDown = (target, duration = 500, showmore = 0) => {
     }), duration);
   }
 };
-
 let _slideToggle = (target, duration = 500) => {
   if (target.hidden) return _slideDown(target, duration); else return _slideUp(target, duration);
 };

@@ -607,6 +607,22 @@
     @media (max-width: 480px) {
       grid-template-columns: 1fr;
     }
+    .card-item {
+      &:hover {
+        background-color: var(--theme-color-accent);
+        img {
+          filter: brightness(0) invert(1);
+        }
+        .card-item__title {
+          color: #fff;
+        }
+        .card-item__bottom {
+          p {
+            color: #fff;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -1123,13 +1139,19 @@
   &__dotts {
     width: 120px;
     display: flex;
+    transition: background-color 0.3s;
     .swiper-pagination-bullet {
+      transition:
+        background-color 0.3s;
       cursor: pointer;
       flex: 1 1 auto;
       opacity: 1;
       height: 3px;
       border-radius: 0px;
       background-color: var(--theme-color-grey);
+      &:hover {
+        background-color: rgba(47, 128, 237, 0.5);
+      }
     }
     .swiper-pagination-bullet-active {
       background-color: var(--theme-color-accent);

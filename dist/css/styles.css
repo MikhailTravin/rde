@@ -259,6 +259,8 @@ a {
           flex-direction: column;
   gap: 40px 0px;
   min-height: 294px;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 @media (max-width: 768px) {
   .card-item {
@@ -268,6 +270,8 @@ a {
   }
 }
 .card-item p {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
   font-weight: 350;
   font-size: 15px;
   line-height: 160%;
@@ -291,6 +295,10 @@ a {
   gap: 10px;
 }
 .card-item__top img {
+  -webkit-transition: -webkit-filter 0.3s;
+  transition: -webkit-filter 0.3s;
+  transition: filter 0.3s;
+  transition: filter 0.3s, -webkit-filter 0.3s;
   width: 60px;
   height: 60px;
 }
@@ -335,6 +343,8 @@ a {
   }
 }
 .card-item__title {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
   color: #111;
   margin: 0px 0px 10px 0px;
 }
@@ -505,6 +515,12 @@ a {
 .spollers__title._spoller-active span::after {
   content: "";
   background-color: #7d7b7b;
+}
+.spollers__body {
+  overflow: hidden;
+  -webkit-transition: height 0.3s ease;
+  transition: height 0.3s ease;
+  will-change: height;
 }
 .spollers__cards {
   margin: 24px 0px 24px 0px;
@@ -1304,6 +1320,19 @@ a {
     grid-template-columns: 1fr;
   }
 }
+.block-solutions__body .card-item:hover {
+  background-color: var(--theme-color-accent);
+}
+.block-solutions__body .card-item:hover img {
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
+}
+.block-solutions__body .card-item:hover .card-item__title {
+  color: #fff;
+}
+.block-solutions__body .card-item:hover .card-item__bottom p {
+  color: #fff;
+}
 
 .block-equipment {
   padding: 120px 0px;
@@ -1893,8 +1922,12 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 .block-reviews__dotts .swiper-pagination-bullet {
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   cursor: pointer;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -1903,6 +1936,9 @@ a {
   height: 3px;
   border-radius: 0px;
   background-color: var(--theme-color-grey);
+}
+.block-reviews__dotts .swiper-pagination-bullet:hover {
+  background-color: rgba(47, 128, 237, 0.5);
 }
 .block-reviews__dotts .swiper-pagination-bullet-active {
   background-color: var(--theme-color-accent);
