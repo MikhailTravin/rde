@@ -9,9 +9,17 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: stretch;
+	color: var(--theme-color-text-common);
+	font-family: var(--font-family);
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 160%;
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
 }
 
-.main {
+.main.new-design {
 	flex-grow: 1;
 	flex-shrink: 1;
 
@@ -20,9 +28,11 @@
 	}
 }
 
-.container {
-	margin: 0 auto;
-	width: 100%;
-	max-width: var(--container-width);
-	padding: 0px 15px;
+.new-design {
+	.container {
+		margin: 0 auto;
+		width: 100%;
+		max-width: var(--container-width);
+		padding: 0px 15px;
+	}
 }
